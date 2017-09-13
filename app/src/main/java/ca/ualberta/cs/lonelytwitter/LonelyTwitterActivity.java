@@ -42,6 +42,14 @@ public class LonelyTwitterActivity extends Activity {
 				String text = bodyText.getText().toString();
 				NormalTweet newTweet = new NormalTweet("Hello");
                 ImportantTweet newTweet2 = new ImportantTweet("Hello", new Date());
+
+                CurrentMood mood1 = new Sad();
+                CurrentMood mood2 = new Happy();
+				Log.d("MOODREPRESENTATION", mood1.getMood());
+                Log.d("MOODREPRESENTATION", mood2.getMood());
+
+                newTweet.listOfMoods.add(mood1);
+                newTweet2.listOfMoods.add(mood2);
                 try {
                     newTweet.setMessage("Goodbye");
                 } catch(TweetTooLongException e){

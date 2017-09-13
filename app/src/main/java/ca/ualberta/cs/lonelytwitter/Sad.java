@@ -1,5 +1,7 @@
 package ca.ualberta.cs.lonelytwitter;
 
+import android.util.Log;
+
 import java.util.Date;
 
 /**
@@ -7,6 +9,11 @@ import java.util.Date;
  */
 
 public class Sad extends CurrentMood {
+    private int levelOfSadness;
+
+    public Sad(){
+        super();
+    }
     public Sad(Date date) {
         super(date);
     }

@@ -15,15 +15,21 @@ public abstract class Tweet {
     public Tweet(String message) {
         this.message = message;
         this.date = new Date();
+        this.listOfMoods = new ArrayList<CurrentMood>();
     }
 
     public Tweet(String message, Date date) {
         this.message = message;
         this.date = date;
+        this.listOfMoods = new ArrayList<CurrentMood>();
     }
 
     public void addMood(CurrentMood mood){
         listOfMoods.add(mood);
+    }
+
+    public void removeMood(CurrentMood mood){
+        listOfMoods.remove(mood);
     }
 
     public abstract Boolean isImportant();
