@@ -42,7 +42,16 @@ public class LonelyTwitterActivity extends Activity {
 
 		bodyText = (EditText) findViewById(R.id.body);
 		Button saveButton = (Button) findViewById(R.id.save);
+        Button clearButton = (Button) findViewById(R.id.clear);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                adapter.clear();
+                adapter.notifyDataSetChanged();
+                clearFile();
+            }
+        });
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -79,6 +88,9 @@ public class LonelyTwitterActivity extends Activity {
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<NormalTweet>>(){}.getType();
             tweetList = gson.fromJson(in, listType);
+            if(tweetList == null) {
+                tweetList = new ArrayList<Tweet>();
+            }
 		} catch (FileNotFoundException e) {
 			tweetList = new ArrayList<Tweet>();
 		} catch (IOException e) {
@@ -90,10 +102,12 @@ public class LonelyTwitterActivity extends Activity {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
 					Context.MODE_PRIVATE);
+			BufferedWriter out = new BufferedWriter (new OutputStreamWriter(fos));
 
-            BufferedWriter out = new BufferedWriter (new OutputStreamWriter(fos));
             Gson gson = new Gson();
             gson.toJson(tweetList, out);
+			out.flush();
+
 			fos.close();
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException();
@@ -102,4 +116,20 @@ public class LonelyTwitterActivity extends Activity {
 			throw new RuntimeException();
 		}
 	}
+
+	private void clearFile() {
+        try{
+            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            BufferedWriter out = new BufferedWriter (new OutputStreamWriter(fos));
+            out.write("");
+            out.flush();
+            fos.close();
+            adapter.notifyDataSetChanged();
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException();
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+    }
 }
