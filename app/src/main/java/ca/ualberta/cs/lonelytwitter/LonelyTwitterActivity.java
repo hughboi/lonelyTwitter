@@ -65,13 +65,13 @@ public class LonelyTwitterActivity extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		String[] tweets = loadFromFile();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				R.layout.list_item, tweets);
+        loadFromFile();
+		adapter = new ArrayAdapter<Tweet>(this,
+				R.layout.list_item, tweetList);
 		oldTweetsList.setAdapter(adapter);
 	}
 
-	private String[] loadFromFile() {
+	private void loadFromFile() {
 		try {
             FileInputStream fis = openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
@@ -80,13 +80,10 @@ public class LonelyTwitterActivity extends Activity {
             Type listType = new TypeToken<ArrayList<NormalTweet>>(){}.getType();
             tweetList = gson.fromJson(in, listType);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			tweetList = new ArrayList<Tweet>();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException();
 		}
-		return tweets.toArray(new String[tweets.size()]);
 	}
 	
 	private void saveInFile() {
