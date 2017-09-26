@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2017. CMPUT 301. University of Alberta - All Rights Reserved. You may use, distribute, or modify
+ *  this code under terms and conditions of the Code of Student Behavior at the University of Alberta. You may find a
+ *  copy of the license in th project. Otherwise please contact hdc@ualbert.ca
+ */
+
 package ca.ualberta.cs.lonelytwitter;
 
 import java.util.ArrayList;
@@ -7,6 +13,14 @@ import java.util.Date;
  * Created by hughc on 2017-09-12.
  */
 
+/**
+ * Represents a tweet.
+ *@author Hugh Craig
+ * @version 1.5
+ * @see NormalTweet
+ * @see ImportantTweet
+ * @since 1.0
+ */
 public abstract class Tweet {
     private String message;
     protected Date date;
@@ -18,6 +32,11 @@ public abstract class Tweet {
         this.listOfMoods = new ArrayList<CurrentMood>();
     }
 
+    /**
+     * Constructs a tweet object using a message and date provided.
+     * @param message message content of the tweet
+     * @param date date tweet created
+     */
     public Tweet(String message, Date date) {
         this.message = message;
         this.date = date;
@@ -34,6 +53,11 @@ public abstract class Tweet {
 
     public abstract Boolean isImportant();
 
+    /**
+     * Sets the message of a tweet.
+     * @param message message that will be set for tweet
+     * @throws TweetTooLongException except thrown if tweet exceeds 140 characters
+     */
     public void setMessage(String message) throws TweetTooLongException{
         if(message.length() > 140){
             throw new TweetTooLongException();
