@@ -2,10 +2,17 @@ package ca.ualberta.cs.lonelytwitter;
 
 import java.util.Date;
 
-/**
- * Created by hughc on 2017-09-12.
- */
 
+/**
+ * ImportantTweet extends the Tweet class and implements the
+ * abstract method isImportant() in order to return TRUE. Also
+ * implements the Tweetable interface.
+ * @author Hugh Craig
+ * @since 09-29-2017
+ * @see NormalTweet
+ * @see Tweet
+ * @see Tweetable
+ */
 public class ImportantTweet extends Tweet implements Tweetable{
 
     public ImportantTweet(String message){

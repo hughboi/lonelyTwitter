@@ -43,14 +43,27 @@ public abstract class Tweet {
         this.listOfMoods = new ArrayList<CurrentMood>();
     }
 
+    /**
+     * Adds a mood to the current list of moods for the tweet.
+     * @param mood the mood you want to add to the tweet
+     */
     public void addMood(CurrentMood mood){
         listOfMoods.add(mood);
     }
 
+    /**
+     * Removes a mood from the current list of moods for tweet.
+     * @param mood the mood you want to remove from the tweet
+     */
     public void removeMood(CurrentMood mood){
         listOfMoods.remove(mood);
     }
 
+    /**
+     * Abstract method that all tweets implement that determines whether a
+     * tweet is important or not.
+     * @return Returns a boolean signaling whether the tweet is important or not.
+     */
     public abstract Boolean isImportant();
 
     /**
