@@ -23,6 +23,8 @@ public abstract class Tweet {
         return date;
     }
 
+    public String getMessage() { return this.message; }
+
     public void setMessage(String message) throws TweetTooLongException {
         if (message.length() > 140) {
             throw new TweetTooLongException();
@@ -39,5 +41,18 @@ public abstract class Tweet {
     @Override
     public String toString(){
         return date.toString() + " | " + message;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (this == null)
+            return false;
+        if(getClass() != o.getClass())
+            return false;
+
+        Tweet tweet = (Tweet) o;
+        return this.message.equals(tweet.message) && this.date.equals(tweet.date);
     }
 }
